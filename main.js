@@ -1,4 +1,5 @@
 "use strict";
+
 // Declare Variables
 const player0 = document.querySelector(".player--0");
 const player1 = document.querySelector(".player--1");
@@ -16,6 +17,8 @@ let currentScore, activePlayer, scores, playing;
 // ==============================Init Function===================================================
 //Reset Values Function
 function init() {
+  alertify.alert("Hello Welcome ❤", "Win from score 50 🥇🏆");
+
   currentScore = 0;
   activePlayer = 0;
   scores = [0, 0];
@@ -92,6 +95,8 @@ holdBtn.addEventListener("click", function () {
     //2. check score if is >= 50
     //finish game
     if (scores[activePlayer] >= 50) {
+      alertify.alert("🥇🏆", `Player ${activePlayer + 1} Is Winner`);
+
       //set playing false tp stop the game
       playing = false;
       //add class winner on winner player
