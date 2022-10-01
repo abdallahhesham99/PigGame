@@ -111,6 +111,9 @@ holdBtn.addEventListener("click", function () {
 
       //hide dice image and disabled roll-hold buttons
       diceImg.classList.add("d-none");
+
+      //reset current score value
+      document.getElementById(`current--${activePlayer}`).textContent = 0;
     } else {
       switchPlayer();
     }
