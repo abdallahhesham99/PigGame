@@ -2,24 +2,41 @@
 // Declare Variables
 const player0 = document.querySelector(".player--0");
 const player1 = document.querySelector(".player--1");
-let playerOneScore = document.querySelector("#score--0");
-let playerTwoScore = document.querySelector("#score--1");
-let PlayerOneCurrentScore = document.querySelector("#current--0");
-let PlayerTwoCurrentScore = document.querySelector("#current--1");
-let diceImg = document.querySelector(".dice");
+const playerOneScore = document.querySelector("#score--0");
+const playerTwoScore = document.querySelector("#score--1");
+const PlayerOneCurrentScore = document.querySelector("#current--0");
+const PlayerTwoCurrentScore = document.querySelector("#current--1");
+const diceImg = document.querySelector(".dice");
+// ===BUTTONS===
+const newGameBtn = document.querySelector(".btn--new");
+const rollBtn = document.querySelector(".btn--roll");
+const holdBtn = document.querySelector(".btn--hold");
 
-let newGameBtn = document.querySelector(".btn--new");
-let rollBtn = document.querySelector(".btn--roll");
-let holdBtn = document.querySelector(".btn--hold");
-
-let currentScore = 0;
-let activePlayer = 0;
-const scores = [0, 0];
-let playing = true;
-
+let currentScore, activePlayer, scores, playing;
 // ==============================Init Function===================================================
+//Reset Values Function
+function init() {
+  currentScore = 0;
+  activePlayer = 0;
+  scores = [0, 0];
+  playing = true;
 
+  //reset all values
+  playerOneScore.textContent = 0;
+  playerTwoScore.textContent = 0;
 
+  PlayerOneCurrentScore.textContent = 0;
+  PlayerTwoCurrentScore.textContent = 0;
+
+  // add active class on first player
+  player0.classList.add("player--active");
+  // remove active class from sec player
+  player1.classList.remove("player--active");
+  //remove winner class
+  player0.classList.remove("player--winner");
+  player1.classList.remove("player--winner");
+}
+init();
 // ===================================Switch Player Function===================================
 function switchPlayer() {
   //remove active player class from current player
@@ -72,9 +89,9 @@ holdBtn.addEventListener("click", function () {
     document.querySelector(`#score--${activePlayer}`).textContent =
       scores[activePlayer];
 
-    //2. check score if is >= 10
+    //2. check score if is >= 50
     //finish game
-    if (scores[activePlayer] >= 10) {
+    if (scores[activePlayer] >= 50) {
       //set playing false tp stop the game
       playing = false;
       //add class winner on winner player
