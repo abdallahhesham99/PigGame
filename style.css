@@ -82,6 +82,10 @@ main {
   opacity: 1;
 }
 
+.player--winner{
+  background-color: #333;
+}
+
 .current {
   background-color: #c7365f;
   opacity: 0.8;

@@ -15,6 +15,11 @@ let holdBtn = document.querySelector(".btn--hold");
 let currentScore = 0;
 let activePlayer = 0;
 const scores = [0, 0];
+let playing = true;
+
+// ==============================Init Function===================================================
+
+
 // ===================================Switch Player Function===================================
 function switchPlayer() {
   //remove active player class from current player
@@ -37,33 +42,58 @@ function switchPlayer() {
 // ===================================Roll Button==============================================
 
 rollBtn.addEventListener("click", function () {
-  //Generating a random number depends on dice numbers
-  const dice = Math.trunc(Math.random() * 6 + 1);
+  if (playing) {
+    //Generating a random number depends on dice numbers
+    const dice = Math.trunc(Math.random() * 6 + 1);
 
-  //displaying the dice picture
-  diceImg.classList.remove("d-none");
-  diceImg.src = `imgs/dice-${dice}.png`;
+    //displaying the dice picture
+    diceImg.classList.remove("d-none");
+    diceImg.src = `imgs/dice-${dice}.png`;
 
-  //if it !== 1
-  if (dice !== 1) {
-    //set the dice value to current score
-    currentScore += dice;
+    //if it !== 1
+    if (dice !== 1) {
+      //set the dice value to current score
+      currentScore += dice;
 
-    document.getElementById(`current--${activePlayer}`).textContent =
-      currentScore;
-  } else {
-    //switch to the second player
+      document.getElementById(`current--${activePlayer}`).textContent =
+        currentScore;
+    } else {
+      //switch to the second player
 
-    switchPlayer();
+      switchPlayer();
+    }
   }
 });
 // ====================================Hold Button=============================================
 holdBtn.addEventListener("click", function () {
-  //1. add the current score to activePlayer's score
-  //2. check score if is >= 100
-  //finish game
-  //else Switch Player
+  if (playing) {
+    //1. add the current score to activePlayer's score
+    scores[activePlayer] += currentScore;
+    document.querySelector(`#score--${activePlayer}`).textContent =
+      scores[activePlayer];
+
+    //2. check score if is >= 10
+    //finish game
+    if (scores[activePlayer] >= 10) {
+      //set playing false tp stop the game
+      playing = false;
+      //add class winner on winner player
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.add("player--winner");
+
+      //remove active class to current player
+      document
+        .querySelector(`.player--${activePlayer}`)
+        .classList.remove("player--active");
+
+      //hide dice image and disabled roll-hold buttons
+      diceImg.classList.add("d-none");
+    } else {
+      switchPlayer();
+    }
+  }
 });
 
-// =================================================================================
-// =================================================================================
+// ==================================New Game Button===============================================
+newGameBtn.addEventListener("click", init);
