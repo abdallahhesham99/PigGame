@@ -14,6 +14,26 @@ let holdBtn = document.querySelector(".btn--hold");
 
 let currentScore = 0;
 let activePlayer = 0;
+const scores = [0, 0];
+// ===================================Switch Player Function===================================
+function switchPlayer() {
+  //remove active player class from current player
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.remove("player--active");
+
+  //reset his current score to 0
+  document.getElementById(`current--${activePlayer}`).textContent = 0;
+  currentScore = 0;
+
+  //if the active player is 0 make it 1 and vice versa
+  activePlayer = activePlayer === 0 ? 1 : 0;
+
+  //set active player class to the current player
+  document
+    .querySelector(`.player--${activePlayer}`)
+    .classList.add("player--active");
+}
 // ===================================Roll Button==============================================
 
 rollBtn.addEventListener("click", function () {
@@ -34,26 +54,16 @@ rollBtn.addEventListener("click", function () {
   } else {
     //switch to the second player
 
-    //remove active player class from current player
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.remove("player--active");
-
-    //reset his current score to 0
-    document.getElementById(`current--${activePlayer}`).textContent =
-      0;
-    currentScore = 0;
-
-    //if the active player is 0 make it 1 and vice versa
-    activePlayer = activePlayer === 0 ? 1 : 0;
-
-    //set active player class to the current player
-    document
-      .querySelector(`.player--${activePlayer}`)
-      .classList.add("player--active");
+    switchPlayer();
   }
 });
-// =================================================================================
-// =================================================================================
+// ====================================Hold Button=============================================
+holdBtn.addEventListener("click", function () {
+  //1. add the current score to activePlayer's score
+  //2. check score if is >= 100
+  //finish game
+  //else Switch Player
+});
+
 // =================================================================================
 // =================================================================================
